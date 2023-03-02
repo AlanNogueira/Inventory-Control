@@ -9,24 +9,25 @@ using Microsoft.Extensions.Logging;
 
 namespace Inventory_Control.Controllers
 {
-    public class SellerController : Controller
-    {
-        private readonly InventoryControlContext _context;
+	public class SellerController : Controller
+	{
+		private readonly InventoryControlContext _context;
 
-        public SellerController(InventoryControlContext context)
-        {
-            _context = context;
-        }
+		public SellerController(InventoryControlContext context)
+		{
+			_context = context;
+		}
 
-        public IActionResult Index()
-        {
-            return View();
-        }
+		public IActionResult Index()
+		{
+			var sellers = _context.Sellers.ToList();
+			return View(sellers);
+		}
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View("Error!");
-        }
-    }
+		[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+		public IActionResult Error()
+		{
+			return View("Error!");
+		}
+	}
 }

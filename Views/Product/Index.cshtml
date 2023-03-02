@@ -1,8 +1,16 @@
+@model IEnumerable<Inventory_Control.Models.Product>
+
 @{
     ViewData["Title"] = "Products";
 }
 
 <div class="text-center">
     <h1 class="display-4">Welcome to Products</h1>
+    @foreach (var Product in Model)
+    {
+        @Html.DisplayFor(Model => Product.ProductName)
+        @Html.DisplayFor(Model => Product.Price)
+        @Html.DisplayFor(Model => Product.Quantity)
+    }
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
