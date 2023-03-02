@@ -14,10 +14,12 @@ namespace Inventory_Control.Context
 			
 		}
 		
-		public DbSet<SaleModel> Sales { get; set; }
+		public DbSet<Sale> Sales { get; set; }
 		
-		public DbSet<SellerModel> Sellers { get; set; }
+		public DbSet<Seller> Sellers { get; set; }
 		
-		public DbSet<ClientModel> Clients { get; set; }
+		public DbSet<Client> Clients { get; set; }
+		
+		public DbSet<Product> Products { get; set; }
 	}
 }
