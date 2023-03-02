@@ -18384,6 +18384,16 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "c:\\Projetos\\Inventory-Control\\Views\\Product\\Index.cshtml",
+      "TargetPath": "Views\\Product\\Index.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Projetos\\Inventory-Control\\Views\\Seller\\Index.cshtml",
+      "TargetPath": "Views\\Seller\\Index.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "c:\\Projetos\\Inventory-Control\\Views\\Shared\\_Layout.cshtml",
       "TargetPath": "Views\\Shared\\_Layout.cshtml",
       "FileKind": "mvc"
@@ -18391,6 +18401,16 @@
     {
       "FilePath": "c:\\Projetos\\Inventory-Control\\Views\\Home\\Index.cshtml",
       "TargetPath": "Views\\Home\\Index.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Projetos\\Inventory-Control\\Views\\Client\\Index.cshtml",
+      "TargetPath": "Views\\Client\\Index.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Projetos\\Inventory-Control\\Views\\Sale\\Index.cshtml",
+      "TargetPath": "Views\\Sale\\Index.cshtml",
       "FileKind": "mvc"
     },
     {
