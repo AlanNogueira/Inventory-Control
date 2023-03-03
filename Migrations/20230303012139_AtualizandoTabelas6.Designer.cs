@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Inventory_Control.Migrations
 {
     [DbContext(typeof(InventoryControlContext))]
-    [Migration("20230302012012_CreateMigrations")]
-    partial class CreateMigrations
+    [Migration("20230303012139_AtualizandoTabelas6")]
+    partial class AtualizandoTabelas6
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -42,7 +42,7 @@ namespace Inventory_Control.Migrations
                     b.Property<DateTime>("CreatioDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("DeletionDate")
+                    b.Property<DateTime?>("DeletionDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Email")
@@ -67,7 +67,7 @@ namespace Inventory_Control.Migrations
                     b.Property<DateTime>("CreatioDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("DeletionDate")
+                    b.Property<DateTime?>("DeletionDate")
                         .HasColumnType("datetime2");
 
                     b.Property<float>("Price")
@@ -79,14 +79,43 @@ namespace Inventory_Control.Migrations
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
+                    b.HasKey("Id");
+
+                    b.ToTable("Products");
+                });
+
+            modelBuilder.Entity("Inventory_Control.Models.ProductsToSale", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatioDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletionDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("ProductId")
+                        .HasColumnType("int");
+
                     b.Property<int?>("SaleId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("SellerId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("ProductId");
+
                     b.HasIndex("SaleId");
 
-                    b.ToTable("Products");
+                    b.HasIndex("SellerId");
+
+                    b.ToTable("ProductsToSales");
                 });
 
             modelBuilder.Entity("Inventory_Control.Models.Sale", b =>
@@ -103,7 +132,7 @@ namespace Inventory_Control.Migrations
                     b.Property<DateTime>("CreatioDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("DeletionDate")
+                    b.Property<DateTime?>("DeletionDate")
                         .HasColumnType("datetime2");
 
                     b.Property<int?>("SellerId")
@@ -138,7 +167,7 @@ namespace Inventory_Control.Migrations
                     b.Property<DateTime>("CreatioDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("DeletionDate")
+                    b.Property<DateTime?>("DeletionDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Email")
@@ -155,11 +184,25 @@ namespace Inventory_Control.Migrations
                     b.ToTable("Sellers");
                 });
 
-            modelBuilder.Entity("Inventory_Control.Models.Product", b =>
+            modelBuilder.Entity("Inventory_Control.Models.ProductsToSale", b =>
                 {
-                    b.HasOne("Inventory_Control.Models.Sale", null)
-                        .WithMany("Products")
+                    b.HasOne("Inventory_Control.Models.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId");
+
+                    b.HasOne("Inventory_Control.Models.Sale", "Sale")
+                        .WithMany()
                         .HasForeignKey("SaleId");
+
+                    b.HasOne("Inventory_Control.Models.Seller", "Seller")
+                        .WithMany()
+                        .HasForeignKey("SellerId");
+
+                    b.Navigation("Product");
+
+                    b.Navigation("Sale");
+
+                    b.Navigation("Seller");
                 });
 
             modelBuilder.Entity("Inventory_Control.Models.Sale", b =>
@@ -175,11 +218,6 @@ namespace Inventory_Control.Migrations
                     b.Navigation("Client");
 
                     b.Navigation("Seller");
-                });
-
-            modelBuilder.Entity("Inventory_Control.Models.Sale", b =>
-                {
-                    b.Navigation("Products");
                 });
 #pragma warning restore 612, 618
         }

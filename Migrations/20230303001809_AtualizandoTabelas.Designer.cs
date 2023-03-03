@@ -4,6 +4,7 @@ using Inventory_Control.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Inventory_Control.Migrations
 {
     [DbContext(typeof(InventoryControlContext))]
-    partial class InventoryControlContextModelSnapshot : ModelSnapshot
+    [Migration("20230303001809_AtualizandoTabelas")]
+    partial class AtualizandoTabelas
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -39,7 +42,7 @@ namespace Inventory_Control.Migrations
                     b.Property<DateTime>("CreatioDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime?>("DeletionDate")
+                    b.Property<DateTime>("DeletionDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Email")
@@ -64,7 +67,7 @@ namespace Inventory_Control.Migrations
                     b.Property<DateTime>("CreatioDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime?>("DeletionDate")
+                    b.Property<DateTime>("DeletionDate")
                         .HasColumnType("datetime2");
 
                     b.Property<float>("Price")
@@ -92,7 +95,7 @@ namespace Inventory_Control.Migrations
                     b.Property<DateTime>("CreatioDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime?>("DeletionDate")
+                    b.Property<DateTime>("DeletionDate")
                         .HasColumnType("datetime2");
 
                     b.Property<int?>("ProductId")
@@ -129,7 +132,7 @@ namespace Inventory_Control.Migrations
                     b.Property<DateTime>("CreatioDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime?>("DeletionDate")
+                    b.Property<DateTime>("DeletionDate")
                         .HasColumnType("datetime2");
 
                     b.Property<int?>("SellerId")
@@ -164,7 +167,7 @@ namespace Inventory_Control.Migrations
                     b.Property<DateTime>("CreatioDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime?>("DeletionDate")
+                    b.Property<DateTime>("DeletionDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Email")

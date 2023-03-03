@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Inventory_Control.Migrations
 {
     /// <inheritdoc />
-    public partial class CreateMigrations : Migration
+    public partial class AtualizandoTabelas : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -27,6 +27,23 @@ namespace Inventory_Control.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Clients", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Products",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ProductName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Quantity = table.Column<int>(type: "int", nullable: false),
+                    Price = table.Column<float>(type: "real", nullable: false),
+                    CreatioDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DeletionDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Products", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -76,32 +93,51 @@ namespace Inventory_Control.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Products",
+                name: "ProductsToSales",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ProductName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Quantity = table.Column<int>(type: "int", nullable: false),
-                    Price = table.Column<float>(type: "real", nullable: false),
+                    SellerId = table.Column<int>(type: "int", nullable: true),
                     SaleId = table.Column<int>(type: "int", nullable: true),
+                    ProductId = table.Column<int>(type: "int", nullable: true),
                     CreatioDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DeletionDate = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Products", x => x.Id);
+                    table.PrimaryKey("PK_ProductsToSales", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Products_Sales_SaleId",
+                        name: "FK_ProductsToSales_Products_ProductId",
+                        column: x => x.ProductId,
+                        principalTable: "Products",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_ProductsToSales_Sales_SaleId",
                         column: x => x.SaleId,
                         principalTable: "Sales",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_ProductsToSales_Sellers_SellerId",
+                        column: x => x.SellerId,
+                        principalTable: "Sellers",
                         principalColumn: "Id");
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Products_SaleId",
-                table: "Products",
+                name: "IX_ProductsToSales_ProductId",
+                table: "ProductsToSales",
+                column: "ProductId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ProductsToSales_SaleId",
+                table: "ProductsToSales",
                 column: "SaleId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ProductsToSales_SellerId",
+                table: "ProductsToSales",
+                column: "SellerId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Sales_ClientId",
@@ -117,6 +153,9 @@ namespace Inventory_Control.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "ProductsToSales");
+
             migrationBuilder.DropTable(
                 name: "Products");
 

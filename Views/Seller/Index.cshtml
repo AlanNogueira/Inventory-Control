@@ -9,9 +9,13 @@
     @foreach (var Seller in Model)
     {
         @Html.DisplayFor(Model => Seller.Name)
+        <br>
         @Html.DisplayFor(Model => Seller.CPF)
+        <br>
         @Html.DisplayFor(Model => Seller.Email)
+        <br>
         @Html.DisplayFor(Model => Seller.BirthDate)
+        <br>
     }
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <a asp-action="Create">Create new Seller</a>
 </div>
