@@ -9,8 +9,11 @@
     @foreach (var Product in Model)
     {
         @Html.DisplayFor(Model => Product.ProductName)
-        @Html.DisplayFor(Model => Product.Price)
+        <br>
         @Html.DisplayFor(Model => Product.Quantity)
+        <br>
+        @Html.DisplayFor(Model => Product.Price)
+        <br>
     }
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <a asp-action="Create">Create new Product</a>
 </div>

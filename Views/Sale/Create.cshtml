@@ -1,0 +1,24 @@
+@model Inventory_Control.Models.Sale
+
+@{
+    ViewData["Title"] = "Create new Sale";
+}
+
+<div class="row">
+    <div class="col-md-5">
+        <form asp-asp-action="Create">
+            <div class="form-group">
+                <label asp-for="Seller" class="control-label"></label>
+                @Html.DropDownListFor(m => m.Seller, (IEnumerable<SelectListItem>)ViewBag.Sellers, new { @class = "form-control" })
+            </div>
+            <div>
+                <label asp-for="Client" class="control-label"></label>
+                @Html.DropDownListFor(m => m.Client, (IEnumerable<SelectListItem>)ViewBag.Clients, new { @class = "form-control" })
+            </div>
+            <div>
+                <label asp-for="Products"></label>
+                @Html.ListBoxFor(m => m.Products, (IEnumerable<SelectListItem>)ViewBag.Products, new { @class = "form-control" })
+            </div>
+        </form>
+    </div>
+</div>
