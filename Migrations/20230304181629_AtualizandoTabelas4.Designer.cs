@@ -4,6 +4,7 @@ using Inventory_Control.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Inventory_Control.Migrations
 {
     [DbContext(typeof(InventoryControlContext))]
-    partial class InventoryControlContextModelSnapshot : ModelSnapshot
+    [Migration("20230304181629_AtualizandoTabelas4")]
+    partial class AtualizandoTabelas4
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -36,7 +39,7 @@ namespace Inventory_Control.Migrations
                     b.Property<string>("CPF")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("CreationDate")
+                    b.Property<DateTime>("CreatioDate")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime?>("DeletionDate")
@@ -61,7 +64,7 @@ namespace Inventory_Control.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime>("CreationDate")
+                    b.Property<DateTime>("CreatioDate")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime?>("DeletionDate")
@@ -89,19 +92,19 @@ namespace Inventory_Control.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime>("CreationDate")
+                    b.Property<DateTime>("CreatioDate")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime?>("DeletionDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("ProductId")
+                    b.Property<int>("Product")
                         .HasColumnType("int");
 
-                    b.Property<int>("SaleId")
+                    b.Property<int>("Sale")
                         .HasColumnType("int");
 
-                    b.Property<int>("SellerId")
+                    b.Property<int>("Seller")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -117,16 +120,16 @@ namespace Inventory_Control.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("ClientId")
+                    b.Property<int>("Client")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("CreationDate")
+                    b.Property<DateTime>("CreatioDate")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime?>("DeletionDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("SellerId")
+                    b.Property<int>("Seller")
                         .HasColumnType("int");
 
                     b.Property<float>("TotalPrice")
@@ -151,7 +154,7 @@ namespace Inventory_Control.Migrations
                     b.Property<string>("CPF")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("CreationDate")
+                    b.Property<DateTime>("CreatioDate")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime?>("DeletionDate")

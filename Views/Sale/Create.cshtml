@@ -6,19 +6,24 @@
 
 <div class="row">
     <div class="col-md-5">
-        <form asp-asp-action="Create">
+        @using(Html.BeginForm("Create"))
+        {
             <div class="form-group">
                 <label asp-for="Seller" class="control-label"></label>
-                @Html.DropDownListFor(m => m.Seller, (IEnumerable<SelectListItem>)ViewBag.Sellers, new { @class = "form-control" })
+                @Html.DropDownListFor(m => m.Seller, (IEnumerable<SelectListItem>)ViewBag.Sellers, new { @class = "form-control", @for = "Seller" })
             </div>
             <div>
                 <label asp-for="Client" class="control-label"></label>
-                @Html.DropDownListFor(m => m.Client, (IEnumerable<SelectListItem>)ViewBag.Clients, new { @class = "form-control" })
+                @Html.DropDownListFor(m => m.Client, (IEnumerable<SelectListItem>)ViewBag.Clients, new { @class = "form-control", @for = "Client" })
             </div>
             <div>
                 <label asp-for="Products"></label>
-                @Html.ListBoxFor(m => m.Products, (IEnumerable<SelectListItem>)ViewBag.Products, new { @class = "form-control" })
+                @Html.ListBoxFor(m => m.Products, (IEnumerable<SelectListItem>)ViewBag.Products, new { @class = "form-control", @for = "Products" })
             </div>
-        </form>
+            <br>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary"/>
+            </div>
+        }
     </div>
 </div>

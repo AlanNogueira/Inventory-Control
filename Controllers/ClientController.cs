@@ -33,7 +33,7 @@ namespace Inventory_Control.Controllers
 		[HttpPost]
 		public IActionResult Create(Client client)
 		{
-			client.CreatioDate = DateTime.Now;
+			client.CreationDate = DateTime.Now;
 			
 			if(ModelState.IsValid)
 				_context.Clients.Add(client);

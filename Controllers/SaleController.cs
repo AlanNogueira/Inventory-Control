@@ -7,6 +7,7 @@ using Inventory_Control.Context;
 using Inventory_Control.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
 namespace Inventory_Control.Controllers
@@ -22,7 +23,11 @@ namespace Inventory_Control.Controllers
 
 		public IActionResult Index()
 		{
-			var sales = _context.Sales.ToList();
+			var sales = _context.Sales.Where( x => x.DeletionDate == null).ToList();
+			ViewBag.sellers = _context.Sellers.Where( x => x.DeletionDate == null).ToList();
+			ViewBag.products = _context.Products.Where( x => x.DeletionDate == null).ToList();
+			ViewBag.productsToSale = _context.ProductsToSales.Where( x => x.DeletionDate == null).ToList();
+			
 			return View(sales);
 		}
 		
@@ -43,10 +48,31 @@ namespace Inventory_Control.Controllers
 		}
 		
 		[HttpPost]
-		public IActionResult Create(Sale sale)
+		public IActionResult Create(int Seller, int Client, List<int> Products)
 		{
-			if(ModelState.IsValid)
-				_context.Sales.Add(sale);
+			Sale sale = new Sale
+			{
+				ClientId = Client,
+				SellerId = Seller,
+				CreationDate = DateTime.Now
+			};
+			
+			_context.Sales.Add(sale);
+			_context.SaveChanges();
+			
+			foreach(int Product in Products)
+			{
+				_context.Products.Find(Product);
+				ProductsToSale productsToSale = new ProductsToSale
+				{
+					SaleId = sale.Id,
+					SellerId = Seller,
+					Product = new Product { Id = Product },
+					CreationDate = DateTime.Now
+				};
+				_context.ProductsToSales.Add(productsToSale);
+			}
+			
 			_context.SaveChanges();
 			return RedirectToAction(nameof(Index));
 		}
