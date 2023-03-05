@@ -6,14 +6,31 @@
 
 <div class="text-center">
     <h1 class="display-4">Welcome to Sales</h1>
-    @* @foreach (var Sale in Model)
-    {
-        @Html.DisplayFor(Model =>Sale.Seller)
-        @Html.DisplayFor(Model => Sale.Client.Name)
-        @Html.DisplayFor(Model => Sale.TotalPrice)
-        foreach(var item in Sale.Products){
-            @Html.DisplayFor(Sale => item.ProductName)
-        }
-    } *@
-    <a asp-action="Create">Create new Sale</a>
+
+    <table class="table table table-striped table-bordered table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Seller</th>
+                <th scope="col">Client</th>
+                <th scope="col">Total Price</th>
+                <th scope="col">Products</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var Sale in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(Model =>Sale.Seller.Name)</td>
+                    <td>@Html.DisplayFor(Model => Sale.Client.Name)</td>
+                    <td>@Html.DisplayFor(Model => Sale.TotalPrice)</td>
+                    <td>
+                        @foreach(Product item in Sale.Products){
+                            <label>@item.ProductName,</label>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <a asp-action="Create" class="btn btn-primary">Create new Sale</a>
 </div>

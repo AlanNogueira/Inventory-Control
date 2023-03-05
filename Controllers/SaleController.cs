@@ -23,21 +23,33 @@ namespace Inventory_Control.Controllers
 
 		public IActionResult Index()
 		{
-			var sales = _context.Sales.Where( x => x.DeletionDate == null).ToList();
-			ViewBag.sellers = _context.Sellers.Where( x => x.DeletionDate == null).ToList();
-			ViewBag.products = _context.Products.Where( x => x.DeletionDate == null).ToList();
-			ViewBag.productsToSale = _context.ProductsToSales.Where( x => x.DeletionDate == null).ToList();
+			List<Sale> sales = _context.Sales.Where( x => x.DeletionDate == null).ToList();
+			
+			foreach(Sale sale in sales)
+			{
+				sale.Client = _context.Clients.Find(sale.ClientId);
+				sale.Seller = _context.Sellers.Find(sale.SellerId);
+				List<ProductsToSale> productsToSales = _context.ProductsToSales.Where( x => x.SaleId == sale.Id).ToList();
+				List<Product> products = new List<Product>();
+				foreach(ProductsToSale productsToSale in productsToSales)
+				{
+					Product product = _context.Products.Find(productsToSale.ProductId);
+					products.Add(product);
+				}
+				sale.Products = products;
+				ViewBag.ProductsToSales = productsToSales;
+			}
 			
 			return View(sales);
 		}
 		
 		public IActionResult Create()
 		{
-			var Clients = _context.Clients.Where(x => x.DeletionDate == null).Select( x => new SelectListItem() 
+			var Clients = _context.Clients.Where(x => x.DeletionDate == null).OrderBy(x => x.Name).Select( x => new SelectListItem() 
 			{ Text = x.Name.ToString(), Value = x.Id.ToString() });
-			var Sellers = _context.Sellers.Where(x => x.DeletionDate == null).Select( x => new SelectListItem() 
+			var Sellers = _context.Sellers.Where(x => x.DeletionDate == null).OrderBy(x => x.Name).Select( x => new SelectListItem() 
 			{ Text = x.Name.ToString(), Value = x.Id.ToString() });
-			var Products = _context.Products.Where(x => x.DeletionDate == null).Select( x => new SelectListItem() 
+			var Products = _context.Products.Where(x => x.DeletionDate == null).OrderBy(x => x.ProductName).Select( x => new SelectListItem() 
 			{ Text = x.ProductName.ToString(), Value = x.Id.ToString() });
 			
 			ViewBag.Clients = Clients;
@@ -67,7 +79,7 @@ namespace Inventory_Control.Controllers
 				{
 					SaleId = sale.Id,
 					SellerId = Seller,
-					Product = new Product { Id = Product },
+					ProductId = Product,
 					CreationDate = DateTime.Now
 				};
 				_context.ProductsToSales.Add(productsToSale);

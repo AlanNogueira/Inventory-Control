@@ -6,16 +6,27 @@
 
 <div class="text-center">
     <h1 class="display-4">Welcome to Sellers</h1>
-    @foreach (var Seller in Model)
-    {
-        @Html.DisplayFor(Model => Seller.Name)
-        <br>
-        @Html.DisplayFor(Model => Seller.CPF)
-        <br>
-        @Html.DisplayFor(Model => Seller.Email)
-        <br>
-        @Html.DisplayFor(Model => Seller.BirthDate)
-        <br>
-    }
-    <a asp-action="Create">Create new Seller</a>
+
+    <table class="table table table-striped table-bordered table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">CPF</th>
+                <th scope="col">Email</th>
+                <th scope="col">Birth Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var Seller in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(Model => Seller.Name)</td>
+                    <td>@Html.DisplayFor(Model => Seller.CPF)</td>
+                    <td>@Html.DisplayFor(Model => Seller.Email)</td>
+                    <td>@Html.DisplayFor(Model => Seller.BirthDate)</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <a asp-action="Create" class="btn btn-primary">Create new Seller</a>
 </div>

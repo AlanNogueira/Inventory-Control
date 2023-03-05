@@ -6,14 +6,25 @@
 
 <div class="text-center">
     <h1 class="display-4">Welcome to Products</h1>
-    @foreach (var Product in Model)
-    {
-        @Html.DisplayFor(Model => Product.ProductName)
-        <br>
-        @Html.DisplayFor(Model => Product.Quantity)
-        <br>
-        @Html.DisplayFor(Model => Product.Price)
-        <br>
-    }
-    <a asp-action="Create">Create new Product</a>
+
+    <table class="table table table-striped table-bordered table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Product Name</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var Product in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(Model => Product.ProductName)</td>
+                    <td>@Html.DisplayFor(Model => Product.Quantity)</td>
+                    <td>@Html.DisplayFor(Model => Product.Price)</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <a asp-action="Create" class="btn btn-primary">Create new Product</a>
 </div>

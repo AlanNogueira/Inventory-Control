@@ -6,16 +6,27 @@
 
 <div class="text-center">
     <h1 class="display-4">Welcome to Clients</h1>
-    @foreach (var Client in Model)
-    {
-        @Html.DisplayFor(Model => Client.Name)
-        <br>
-        @Html.DisplayFor(Model => Client.CPF)
-        <br>
-        @Html.DisplayFor(Model => Client.Email)
-        <br>
-        @Html.DisplayFor(Model => Client.BirthDate)
-        <br>
-    }
-    <a asp-action="Create">Create new Client</a>
+
+    <table class="table table table-striped table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>CPF</th>
+                <th>Email</th>
+                <th>Birth Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var Client in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(Model => Client.Name)</td>
+                    <td>@Html.DisplayFor(Model => Client.CPF)</td>
+                    <td>@Html.DisplayFor(Model => Client.Email)</td>
+                    <td>@Html.DisplayFor(Model => Client.BirthDate)</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <a asp-action="Create" class="btn btn-primary">Create new Client</a>
 </div>
