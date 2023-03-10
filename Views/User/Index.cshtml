@@ -1,0 +1,43 @@
+@model Inventory_Control.Models.User
+
+@{
+    ViewData["Title"] = "Login";
+}
+
+@using(Html.BeginForm("Login", "User", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary()
+    if (@ViewBag.Message != null)
+    {
+        <div style="border:1px solid red">
+            @ViewBag.Message
+        </div>
+    }
+    <table>
+        <tr>
+            <td>@Html.LabelFor(x => x.userName)</td>
+            <td>@Html.TextBoxFor(x => x.userName)</td>
+            <td>@Html.ValidationMessageFor(x => x.userName)</td>
+        </tr>
+        <tr>
+            <td> @Html.LabelFor(x => x.password)</td>
+            <td> @Html.PasswordFor(x => x.password) </td>
+            <td> @Html.ValidationMessageFor(x => x.password) </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>
+                <input type="submit" value="Login" class="btn btn-primary" />
+            </td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>
+                <label>Don't have a record? register &nbsp;</label><a asp-action="Register">here</a>
+            </td>
+            <td></td>
+        </tr>
+    </table>
+}

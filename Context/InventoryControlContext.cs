@@ -23,5 +23,7 @@ namespace Inventory_Control.Context
 		public DbSet<Product> Products { get; set; }
 		
 		public DbSet<ProductsToSale> ProductsToSales { get; set; }
+		
+		public DbSet<User> Users { get; set; }
 	}
 }

@@ -1,0 +1,28 @@
+@model Inventory_Control.Models.User
+
+@{
+    ViewData["Title"] = "User Register";
+}
+
+<div class="row">
+    <div class="col-md-5">
+        @using (Html.BeginForm("Register"))
+        {
+            @Html.ValidationSummary()
+            <div class="form-group">
+                @Html.LabelFor(x => x.userName, new { @class = "control-label", @for = "userName" })
+                @Html.TextBoxFor(x => x.userName, new { @class = "form-control", @for = "userName" })
+                @Html.ValidationMessageFor(x => x.userName)
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(x => x.password, new { @class = "control-label", @for = "password" })
+                @Html.PasswordFor(x => x.password, new { @class = "form-control", @for = "password" })
+                @Html.ValidationMessageFor(x => x.userName)
+            </div>
+            <br>
+            <div class="form-group">
+                <input type="submit" value="Register" class="btn btn-primary"/>
+            </div>
+        }
+    </div>
+</div>
